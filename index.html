@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Advance Excel Course Purchase</title>
-    <!-- Load Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load Inter font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Inter font --><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -77,22 +75,19 @@
     <div class="w-full max-w-md mx-auto">
         <div class="bg-gray-800 rounded-2xl shadow-2xl overflow-hidden">
             
-            <!-- Header -->
-            <div class="p-6 border-b border-gray-700">
+            <!-- Header --><div class="p-6 border-b border-gray-700">
                 <h1 class="text-2xl font-bold text-center text-blue-400">Secure Course Purchase</h1>
                 <p class="text-center text-gray-400 text-sm mt-1">Complete your purchase in 3 simple steps</p>
             </div>
 
             <div class="p-6 md:p-8">
                 
-                <!-- NEW: Course Name Display with Glowing Effect -->
-                <div class="mb-8 border-b border-gray-700 pb-4 text-center">
+                <!-- Course Name Display with Glowing Effect --><div class="mb-8 border-b border-gray-700 pb-4 text-center">
                     <h3 class="text-sm font-medium text-gray-400 uppercase tracking-wider mb-2">You Are Purchasing:</h3>
                     <h2 id="courseNameDisplay" class="text-3xl font-extrabold neon-glow"></h2>
                 </div>
 
-                <!-- Step 1: Form Section -->
-                <div id="formSection">
+                <!-- Step 1: Form Section --><div id="formSection">
                     <h2 class="text-lg font-semibold mb-4 text-center">Step 1: Fill Your Details</h2>
                     <form id="purchaseForm" class="space-y-4">
                         <div>
@@ -113,21 +108,17 @@
                     </form>
                 </div>
 
-                <!-- Step 2 & 3: Payment Section (Initially Hidden) -->
-                <div id="paymentSection" class="hidden text-center">
+                <!-- Step 2 & 3: Payment Section (Initially Hidden) --><div id="paymentSection" class="hidden text-center">
                     
-                    <!-- Step 2: QR Code Section -->
-                    <div id="step2QR">
+                    <!-- Step 2: QR Code Section --><div id="step2QR">
                         <h2 class="text-lg font-semibold mb-4">Step 2: Scan to Pay ₹50</h2>
                         <div class="flex justify-center mb-4">
-                            <!-- Placeholder QR Code -->
-                            <img src="https://placehold.co/250x250/ffffff/333333?text=Scan+QR+to+Pay" alt="Payment QR Code" class="rounded-lg shadow-md border-4 border-white">
+                            <!-- UPDATED: Using the user's uploaded image as the QR code source --><img src="image_d173d1.png" alt="Payment QR Code" class="rounded-lg shadow-md border-4 border-white w-64 h-64 object-contain">
                         </div>
                         <p class="text-gray-400 text-sm mb-6">Scan using any UPI app (GPay, PhonePe, Paytm, etc.)</p>
                     </div>
 
-                    <!-- Step 3: Confirmation - Stage 1 (Initial Paid Button) -->
-                    <h2 class="text-lg font-semibold mb-4 mt-6">Step 3: Confirm Your Payment</h2>
+                    <!-- Step 3: Confirmation - Stage 1 (Initial Paid Button) --><h2 class="text-lg font-semibold mb-4 mt-6">Step 3: Confirm Your Payment</h2>
                     
                     <div id="step3Initial">
                         <button type="button" id="initialPaidButton" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out">
@@ -135,8 +126,7 @@
                         </button>
                     </div>
 
-                    <!-- Step 3: Confirmation - Stage 2 (UTR Input - Initially Hidden) -->
-                    <div id="step3UTR" class="hidden mt-4 transition-all duration-300 ease-in-out">
+                    <!-- Step 3: Confirmation - Stage 2 (UTR Input - Initially Hidden) --><div id="step3UTR" class="hidden mt-4 transition-all duration-300 ease-in-out">
                         <p class="text-gray-400 mb-3 text-sm">Please enter your UTR / Reference ID for quick access verification.</p>
                         <div class="mb-4">
                             <label for="utr" class="sr-only">UTR / Payment Reference ID</label>
@@ -151,19 +141,16 @@
 
             </div>
 
-            <!-- Support Section -->
-            <div class="p-6 bg-gray-850 border-t border-gray-700 text-center">
+            <!-- Support Section --><div class="p-6 bg-gray-850 border-t border-gray-700 text-center">
                 <p class="text-sm text-gray-400 mb-3">Having trouble? Get instant support on WhatsApp.</p>
-                <!-- UPDATED WHATSAPP NUMBER -->
-                <a id="whatsappButton" href="https://wa.me/919040754205?text=Hello%2C%20I%20need%20help%20with%20the%20course%20payment." target="_blank" class="inline-block bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-5 rounded-lg shadow-md transition-all duration-300">
+                <!-- UPDATED WHATSAPP NUMBER --><a id="whatsappButton" href="https://wa.me/919040754205?text=Hello%2C%20I%20need%20help%20with%20the%20course%20payment." target="_blank" class="inline-block bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-5 rounded-lg shadow-md transition-all duration-300">
                     Chat on WhatsApp (9040754205)
                 </a>
             </div>
         </div>
     </div>
 
-    <!-- Confirmation Modal (Used for redirect notification) -->
-    <div id="confirmationModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden animate-fade-in">
+    <!-- Confirmation Modal (Used for redirect notification) --><div id="confirmationModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden animate-fade-in">
         <div class="bg-gray-800 rounded-2xl shadow-2xl p-8 w-full max-w-sm text-center animate-scale-up">
             
             <svg class="checkmark mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52" width="60" height="60">
@@ -171,11 +158,9 @@
                 <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
             </svg>
             
-            <!-- Modal Title and Message will be set by JS -->
-            <h2 id="modalTitle" class="text-2xl font-bold mb-4 text-green-400"></h2>
+            <!-- Modal Title and Message will be set by JS --><h2 id="modalTitle" class="text-2xl font-bold mb-4 text-green-400"></h2>
             <p id="modalMessage" class="text-gray-300 mb-6"></p>
-            <!-- Button acts as a manual redirect/close -->
-            <button id="closeModalButton" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300">
+            <!-- Button acts as a manual redirect/close --><button id="closeModalButton" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300">
                 Continue
             </button>
         </div>
@@ -206,7 +191,7 @@
         const whatsappButton = document.getElementById('whatsappButton');
         const modalTitle = document.getElementById('modalTitle');
         const modalMessage = document.getElementById('modalMessage');
-        const courseNameDisplay = document.getElementById('courseNameDisplay'); // NEW element
+        const courseNameDisplay = document.getElementById('courseNameDisplay'); // Course Name Display
         
         let userDetails = {};
 
