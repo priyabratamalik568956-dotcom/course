@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advance Excel Course Purchase</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Inter font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom transition for height */
+        .max-h-0 { max-height: 0; }
+        .max-h-screen { max-height: 100vh; /* Or a specific large value */ }
+
+        /* Custom animation for modal */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes scaleUp {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-out;
+        }
+        .animate-scale-up {
+            animation: scaleUp 0.3s ease-out;
+        }
+
+        /* SVG Tick Animation */
+        .checkmark-circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+            stroke: #4CAF50; /* Green */
+            fill: none;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+
+        .checkmark-check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+            stroke: #4CAF50; /* Green */
+            fill: none;
+            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards; /* Delayed after circle */
+        }
+
+        @keyframes stroke {
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+        
+        /* New styles for glowing/animation on Course Name */
+        @keyframes pulse-glow {
+            0%, 100% { text-shadow: 0 0 5px rgba(59, 130, 246, 0.5), 0 0 10px rgba(96, 165, 250, 0.4); }
+            50% { text-shadow: 0 0 10px rgba(59, 130, 246, 0.8), 0 0 20px rgba(96, 165, 250, 0.6); }
+        }
+
+        .neon-glow {
+            color: #93c5fd; /* Light blue color for the glow */
+            animation: pulse-glow 2s infinite alternate;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex items-center justify-center p-4">
+
+    <div class="w-full max-w-md mx-auto">
+        <div class="bg-gray-800 rounded-2xl shadow-2xl overflow-hidden">
+            
+            <!-- Header -->
+            <div class="p-6 border-b border-gray-700">
+                <h1 class="text-2xl font-bold text-center text-blue-400">Secure Course Purchase</h1>
+                <p class="text-center text-gray-400 text-sm mt-1">Complete your purchase in 3 simple steps</p>
+            </div>
+
+            <div class="p-6 md:p-8">
+                
+                <!-- NEW: Course Name Display with Glowing Effect -->
+                <div class="mb-8 border-b border-gray-700 pb-4 text-center">
+                    <h3 class="text-sm font-medium text-gray-400 uppercase tracking-wider mb-2">You Are Purchasing:</h3>
+                    <h2 id="courseNameDisplay" class="text-3xl font-extrabold neon-glow"></h2>
+                </div>
+
+                <!-- Step 1: Form Section -->
+                <div id="formSection">
+                    <h2 class="text-lg font-semibold mb-4 text-center">Step 1: Fill Your Details</h2>
+                    <form id="purchaseForm" class="space-y-4">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Full Name</label>
+                            <input type="text" id="name" name="name" required class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200" placeholder="e.g., Rohan Kumar">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email Address</label>
+                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200" placeholder="e.g., rohan@example.com">
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-300 mb-1">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" required class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200" placeholder="e.g., 9876543210">
+                        </div>
+                        <button type="submit" id="buyNowButton" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out">
+                            Buy Now (₹50)
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Step 2 & 3: Payment Section (Initially Hidden) -->
+                <div id="paymentSection" class="hidden text-center">
+                    
+                    <!-- Step 2: QR Code Section -->
+                    <div id="step2QR">
+                        <h2 class="text-lg font-semibold mb-4">Step 2: Scan to Pay ₹50</h2>
+                        <div class="flex justify-center mb-4">
+                            <!-- Placeholder QR Code -->
+                            <img src="https://placehold.co/250x250/ffffff/333333?text=Scan+QR+to+Pay" alt="Payment QR Code" class="rounded-lg shadow-md border-4 border-white">
+                        </div>
+                        <p class="text-gray-400 text-sm mb-6">Scan using any UPI app (GPay, PhonePe, Paytm, etc.)</p>
+                    </div>
+
+                    <!-- Step 3: Confirmation - Stage 1 (Initial Paid Button) -->
+                    <h2 class="text-lg font-semibold mb-4 mt-6">Step 3: Confirm Your Payment</h2>
+                    
+                    <div id="step3Initial">
+                        <button type="button" id="initialPaidButton" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out">
+                            I Have Paid
+                        </button>
+                    </div>
+
+                    <!-- Step 3: Confirmation - Stage 2 (UTR Input - Initially Hidden) -->
+                    <div id="step3UTR" class="hidden mt-4 transition-all duration-300 ease-in-out">
+                        <p class="text-gray-400 mb-3 text-sm">Please enter your UTR / Reference ID for quick access verification.</p>
+                        <div class="mb-4">
+                            <label for="utr" class="sr-only">UTR / Payment Reference ID</label>
+                            <input type="text" id="utr" name="utr" required class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 text-center" placeholder="Enter UTR / Payment Reference ID">
+                        </div>
+                        <button type="button" id="confirmUtrButton" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out">
+                            Confirm UTR & Finish
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Support Section -->
+            <div class="p-6 bg-gray-850 border-t border-gray-700 text-center">
+                <p class="text-sm text-gray-400 mb-3">Having trouble? Get instant support on WhatsApp.</p>
+                <!-- UPDATED WHATSAPP NUMBER -->
+                <a id="whatsappButton" href="https://wa.me/919040754205?text=Hello%2C%20I%20need%20help%20with%20the%20course%20payment." target="_blank" class="inline-block bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-5 rounded-lg shadow-md transition-all duration-300">
+                    Chat on WhatsApp (9040754205)
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal (Used for redirect notification) -->
+    <div id="confirmationModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden animate-fade-in">
+        <div class="bg-gray-800 rounded-2xl shadow-2xl p-8 w-full max-w-sm text-center animate-scale-up">
+            
+            <svg class="checkmark mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52" width="60" height="60">
+                <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+            </svg>
+            
+            <!-- Modal Title and Message will be set by JS -->
+            <h2 id="modalTitle" class="text-2xl font-bold mb-4 text-green-400"></h2>
+            <p id="modalMessage" class="text-gray-300 mb-6"></p>
+            <!-- Button acts as a manual redirect/close -->
+            <button id="closeModalButton" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300">
+                Continue
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // --- CONSTANTS ---
+        const WHATSAPP_NUMBER = '919040754205'; // Updated number
+        const COURSE_NAME = 'Advance Excel Mastery'; // UPDATED COURSE NAME
+        const COURSE_PRICE = '₹50'; // UPDATED PRICE
+        const REDIRECT_DELAY_MS = 1500; // 1.5 seconds delay before auto-redirect
+
+        // Get all elements
+        const purchaseForm = document.getElementById('purchaseForm');
+        const formSection = document.getElementById('formSection');
+        const paymentSection = document.getElementById('paymentSection');
+        const step2QR = document.getElementById('step2QR'); // Get the QR code wrapper
+        
+        // Step 3 elements
+        const step3Initial = document.getElementById('step3Initial');
+        const step3UTR = document.getElementById('step3UTR');
+        const initialPaidButton = document.getElementById('initialPaidButton');
+        const utrInput = document.getElementById('utr');
+        const confirmUtrButton = document.getElementById('confirmUtrButton');
+        
+        const confirmationModal = document.getElementById('confirmationModal');
+        const closeModalButton = document.getElementById('closeModalButton');
+        const whatsappButton = document.getElementById('whatsappButton');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalMessage = document.getElementById('modalMessage');
+        const courseNameDisplay = document.getElementById('courseNameDisplay'); // NEW element
+        
+        let userDetails = {};
+
+        // Update displayed text based on constants
+        document.getElementById('buyNowButton').textContent = `Buy Now (${COURSE_PRICE})`;
+        courseNameDisplay.textContent = COURSE_NAME; // Set the glowing course name
+
+        // Apply CSS transitions
+        formSection.classList.add('transition-all', 'duration-300', 'ease-in-out', 'overflow-hidden', 'opacity-100', 'max-h-screen');
+        paymentSection.classList.add('transition-all', 'duration-300', 'ease-in-out', 'overflow-hidden', 'opacity-0', 'max-h-0');
+
+        // Handle form submission (Step 1 to Step 2)
+        purchaseForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            
+            if (name && email && phone) {
+                userDetails = { name, email, phone };
+
+                // Update text based on new price and course name
+                document.querySelector('#step2QR h2').textContent = `Step 2: Scan to Pay ${COURSE_PRICE}`;
+                
+                // Smoothly transition sections
+                formSection.classList.add('opacity-0', 'max-h-0');
+                formSection.classList.remove('opacity-100', 'max-h-screen');
+                
+                setTimeout(() => {
+                    formSection.classList.add('hidden');
+                    paymentSection.classList.remove('hidden');
+                    paymentSection.classList.add('opacity-100', 'max-h-screen');
+                    paymentSection.scrollIntoView({ behavior: 'smooth' });
+                }, 300); 
+            }
+        });
+
+        // Handle "I Have Paid" click (Stage 1 to Stage 2)
+        initialPaidButton.addEventListener('click', () => {
+            step2QR.classList.add('hidden'); // Hide QR code when UTR input is visible
+            step3Initial.classList.add('hidden');
+            step3UTR.classList.remove('hidden');
+            utrInput.focus();
+            step3UTR.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+
+        // Handle "Confirm UTR" click (Stage 2 - Final Action with Auto-Redirect)
+        confirmUtrButton.addEventListener('click', () => {
+            const utr = utrInput.value.trim();
+            
+            // Validation: UTR is mandatory
+            if (utr === "") {
+                utrInput.placeholder = "🔴 UTR / Reference ID is Required 🔴";
+                utrInput.classList.add('border-red-500', 'ring-2', 'ring-red-500');
+                setTimeout(() => {
+                    utrInput.classList.remove('border-red-500', 'ring-2', 'ring-red-500');
+                    utrInput.placeholder = "Enter UTR / Payment Reference ID";
+                }, 2000);
+                return; 
+            }
+
+            // 1. Prepare detailed message for auto-redirect
+            const whatsappMessage = 
+                `*✅ PAYMENT CONFIRMED (UTR RECEIVED)*\n\n` +
+                `Hello, I have paid ${COURSE_PRICE} for the *${COURSE_NAME}* and entered the UTR/Reference ID.\n\n` +
+                `**UTR/Ref ID:** ${utr}\n\n` +
+                `**My Details:**\n` +
+                `Name: ${userDetails.name || 'N/A'}\n` +
+                `Email: ${userDetails.email || 'N/A'}\n` +
+                `Phone: ${userDetails.phone || 'N/A'}\n\n` +
+                `Please verify the payment using this UTR and send my course access link immediately. Thank you!`;
+
+            const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
+            
+            // 2. Update the modal for Payment Verification
+            modalTitle.textContent = "Payment Verification in Progress..."; 
+            modalMessage.innerHTML = `Thank you! Your UTR (**${utr}**) has been securely sent via WhatsApp to the administrator for **immediate verification**. Once verified, you will receive the course access link. Please ensure you finish sending the message on WhatsApp now.`; 
+
+            // Update modal button for manual trigger/close
+            closeModalButton.textContent = "Open WhatsApp Now";
+
+            // Show modal
+            confirmationModal.classList.remove('hidden');
+
+            // 3. Auto-redirect after a short delay
+            setTimeout(() => {
+                window.open(whatsappUrl, '_blank');
+                // The modal stays open until manually closed, but the button label changes back for clarity.
+                closeModalButton.textContent = "Close Confirmation";
+            }, REDIRECT_DELAY_MS);
+        });
+
+        // Handle manual redirect/close on modal button click
+        closeModalButton.addEventListener('click', () => {
+             const utr = utrInput.value.trim();
+
+             // Only open WhatsApp manually if UTR was provided and the auto-redirect might have failed
+             if(closeModalButton.textContent === "Open WhatsApp Now") {
+                const whatsappMessage = 
+                    `*✅ PAYMENT CONFIRMED (MANUAL REDIRECT)*\n\n` +
+                    `Hello, I have paid ${COURSE_PRICE} for the *${COURSE_NAME}* and entered the UTR/Reference ID.\n\n` +
+                    `**UTR/Ref ID:** ${utr}\n\n` +
+                    `**My Details:**\n` +
+                    `Name: ${userDetails.name || 'N/A'}\n` +
+                    `Email: ${userDetails.email || 'N/A'}\n` +
+                    `Phone: ${userDetails.phone || 'N/A'}\n\n` +
+                    `Please verify the payment using this UTR and send my course access link immediately. Thank you!`;
+                const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
+                window.open(whatsappUrl, '_blank');
+             }
+             
+             confirmationModal.classList.add('hidden');
+        });
+
+        // Close modal if clicking on the background overlay
+        confirmationModal.addEventListener('click', (e) => {
+            if (e.target === confirmationModal) {
+                confirmationModal.classList.add('hidden');
+            }
+        });
+
+    </script>
+
+</body>
+</html>
